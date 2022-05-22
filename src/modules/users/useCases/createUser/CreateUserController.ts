@@ -10,16 +10,14 @@ class CreateUserController {
 
     try {
       const user = this.createUserUseCase.execute({ name, email });
+
       return response.status(201).json({
-        success: true,
-        message: `User ${user.name} was created with successfully!`,
-        payload: user,
+        admin: user.admin,
+        name: user.name,
+        email: user.email,
       });
     } catch (error) {
-      return response.status(404).json({
-        success: false,
-        message: `${error.message}`,
-      });
+      return response.status(400).send();
     }
   }
 }
