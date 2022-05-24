@@ -10,15 +10,17 @@ class ShowUserProfileController {
 
     try {
       const user = this.showUserProfileUseCase.execute({ user_id });
-      return response.status(200).json({
-        success: true,
-        user,
-      });
+      const { updated_at, created_at, ...rest } = user;
+
+      const userDateFormatted = {
+        rest,
+        updated_at: new Date(),
+        created_at: new Date(),
+      };
+
+      return response.status(200).json(userDateFormatted);
     } catch (error) {
-      return response.status(404).json({
-        success: false,
-        message: error.message,
-      });
+      return response.status(404).json({ error });
     }
   }
 }
