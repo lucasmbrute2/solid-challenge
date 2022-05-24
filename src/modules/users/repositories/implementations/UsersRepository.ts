@@ -21,11 +21,17 @@ class UsersRepository implements IUsersRepository {
   create({ name, email }: ICreateUserDTO): User {
     const user = new User();
 
-    const newUser = { ...user, name, email };
+    const newUserObj = {
+      ...user,
+      name,
+      email,
+      created_at: new Date(),
+      updated_at: new Date(),
+    };
 
-    this.users.push(newUser);
+    this.users.push(newUserObj);
 
-    return newUser;
+    return newUserObj;
   }
 
   findById(id: string): User | undefined {
@@ -33,7 +39,8 @@ class UsersRepository implements IUsersRepository {
   }
 
   findByEmail(email: string): User | undefined {
-    return this.users.find((user) => user.email === email);
+    const user = this.users.find((user) => user.email === email);
+    return user;
   }
 
   turnAdmin(receivedUser: User): User {
