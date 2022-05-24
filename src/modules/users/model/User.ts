@@ -5,8 +5,8 @@ class User {
   name: string;
   admin: boolean;
   email: string;
-  created_at: Date;
-  updated_at: Date;
+  created_at: string | Date;
+  updated_at: string | Date;
 
   constructor() {
     if (!this.id) this.id = uuidV4();
