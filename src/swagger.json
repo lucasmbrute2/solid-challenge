@@ -1,0 +1,312 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "RentalX Documentation",
+    "description": "This is a API Rent",
+    "version": "1.0.0",
+    "contact": {
+      "email": "lucasmbrute614@gmail.com"
+    }
+  },
+  "paths": {
+    "/users":{
+      "post": {
+        "tags": ["Users"],
+        "summary": "Creates a new user",
+        "requestBody": {
+          "content": {
+            "application/json":{
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "User name example",
+                  "email": "3131@gmail.com" 
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema":{
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "admin": {
+                      "type": "boolean"
+                    },
+                    "id": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "name": "Lucas",
+                    "email": "1234@gmail.com",
+                    "admin": "false",
+                    "id": "A uuidv4 value"
+                  }
+                }
+              }
+            }
+          },
+          "400":{
+            "description": "User already exists",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "error": "User already exists, please try again!"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["Get all users"],
+        "summary": "Get all users",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type":"object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "email":{
+                        "type": "string"
+                      },
+                      "admin": {
+                        "type": "boolean"
+                      },
+                      "id": {
+                        "type": "string"
+                      },
+                      " created_at": {
+                        "type": "string"
+                      },
+                      " updated_at": {
+                        "type": "string"
+                      }
+                    },
+                    "example": {
+                      "name": "Lucas",
+                      "email": "1234@gmail.com",
+                      "admin": "false",
+                      "id": "A uuidv4 value"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400":{
+            "description": "Error",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "error": "You must be a admin to list all users!"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{user_id}": {
+      "get": {
+        "tags": ["Get user by ID"],
+        "summary": "Get a unique user",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "email":{
+                      "type": "string"
+                    },
+                    "admin": {
+                      "type": "boolean"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    " created_at": {
+                      "type": "string"
+                    },
+                    " updated_at": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "name": "Lucas",
+                    "email": "1234@gmail.com",
+                    "admin": "false",
+                    "id": "A uuidv4 value"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error",
+            "content": {
+              "application/json":{
+                "schema":{
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "error": "User not found."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{user_id}/admin": {
+      "patch": {
+        "tags": ["Turn a user into admin"],
+        "summary": "Turn a user into admin",
+
+        "requestBody": {
+          "content": {
+            "application/json":{
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email":{
+                    "type": "string"
+                  },
+                  "admin": {
+                    "type": "boolean"
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  " created_at": {
+                    "type": "string"
+                  },
+                  " updated_at": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "Lucas",
+                  "email": "1234@gmail.com",
+                  "admin": "false",
+                  "id": "A uuidv4 value"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json":{
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "admin":{
+                      "type": "boolean"
+                    },
+                    "id": {
+                     "type":"string"
+                    },
+                    " created_at": {
+                      "type": "string"
+                    },
+                    " updated_at": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "name": "Lucas",
+                    "email": "1234@gmail.com",
+                    "admin": "false",
+                    "id": "A uuidv4 value"
+                  }
+                }
+              }
+            }
+
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                  "error": "string"
+                  },
+                  "example": {
+                    "error": "User not found."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
