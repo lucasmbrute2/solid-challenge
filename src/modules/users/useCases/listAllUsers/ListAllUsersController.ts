@@ -10,12 +10,12 @@ class ListAllUsersController {
 
     try {
       const allUsers = this.listAllUsersUseCase.execute({
-        user_id: user_id.toString(),
+        user_id: user_id?.toString(),
       });
 
       return response.send(allUsers);
     } catch (error) {
-      return response.status(400).json({ error });
+      return response.status(400).json({ error: error.message });
     }
   }
 }
